@@ -32,6 +32,10 @@ const defaultFilms: Films[] = [
 ];
 
 router.get("/", (req, res) => {
+    
+    if (req.query.order && typeof req.query.order !== "string") {
+        return res.sendStatus(400);
+    }
 
     const orderByTitle =
         typeof req.query.order === "string" && req.query.order.includes("title")
