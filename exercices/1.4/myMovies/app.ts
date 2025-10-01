@@ -6,15 +6,39 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 let getCounter = 0;
+let postCounter = 0;
+let updateCounter = 0;
+let deleteCounter = 0;
 
 app.use((req, res, next) => {
-    if (req.method === 'GET') {
+    
+    
+
+    if(req.method === 'GET') {
         getCounter++;
-        console.log(`Get counter : ${getCounter}`);
     }
+
+    if(req.method === 'POST') {
+        postCounter++;
+    }
+
+    if(req.method === 'UPDATE') {
+        updateCounter++;
+    }
+
+    if(req.method === 'DELETE') {
+        deleteCounter++;
+    }
+
+    console.log(`Request Counter : \n
+        Get : ${getCounter} \n
+        Post : ${postCounter} \n
+        Update : ${updateCounter} \n
+        Delete : ${deleteCounter}`);
     next();
     res.status(200);
 })
+
 
 app.use("/films", router);
 

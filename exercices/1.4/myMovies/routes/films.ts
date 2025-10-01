@@ -32,14 +32,24 @@ const defaultFilms: Films[] = [
 ];
 
 router.get("/", (req, res) => {
-    if (!req.query["minimum-duration"]) {
-        res.json(defaultFilms);
+    if (!req.query["minimum-duration"] && !req.query["titleStartWith"]) {
+        return res.json(defaultFilms);
     }
-    const durationMini = Number(req.query["minimum-duration"]);
-    const filteredFilms = defaultFilms.filter((film) => {
-        return film.duration >= durationMini;
-    })
-    res.sendStatus(200).json(filteredFilms);
+    
+    let filteredFilms = [...defaultFilms];
+
+    if(req.query["minimum-duration"]) {
+        const durationMini = Number(req.query["minimum-duration"]);
+        filteredFilms = filteredFilms.filter(film => film.duration >= durationMini);
+    }
+    
+
+    if (req.query["titleStartsWith"]) {
+        const titleStart = req.query["titleStartsWith"].toString().toLowerCase();
+        filteredFilms = filteredFilms.filter(film => film.title.toLowerCase().startsWith(titleStart));
+    }
+
+    return res.status(200).json(filteredFilms);
 });
 
 router.get("/:id", (req, res) => {
