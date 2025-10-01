@@ -33,13 +33,13 @@ const defaultFilms: Films[] = [
 
 router.get("/", (req, res) => {
     if (!req.query["minimum-duration"]) {
-        return res.json(defaultFilms);
+        res.json(defaultFilms);
     }
     const durationMini = Number(req.query["minimum-duration"]);
     const filteredFilms = defaultFilms.filter((film) => {
         return film.duration >= durationMini;
     })
-    return res.status(200).json(filteredFilms);
+    res.sendStatus(200).json(filteredFilms);
 });
 
 router.get("/:id", (req, res) => {
