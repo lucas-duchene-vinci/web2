@@ -1,0 +1,17 @@
+
+GET http://localhost:3000/films
+
+###
+
+GET http://localhost:3000/films/?minimum-duration=120&titleStartsWith=so
+
+###
+
+post http://localhost:3000/films
+Content-Type: application/json
+
+{
+    "title": "Something",
+    "director": "Somebody",
+    "duration": 150
+}
