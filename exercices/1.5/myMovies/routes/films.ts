@@ -33,7 +33,7 @@ const defaultFilms: Films[] = [
 
 router.get("/", (req, res) => {
     if (!req.query["minimum-duration"] && !req.query["titleStartWith"]) {
-        return res.json(defaultFilms);
+        return res.status(200).json(defaultFilms);
     }
     
     let filteredFilms = [...defaultFilms];
@@ -57,10 +57,10 @@ router.get("/:id", (req, res) => {
     const film = defaultFilms.find((film) => film.id === id);
 
     if(!film) {
-        return res.sendStatus(404);
+        return res.status(404).send("Not found.");
     }
 
-    return res.json(film);
+    return res.send(200).json(film);
 });
 
 router.post("/", (req, res) => {
@@ -79,7 +79,7 @@ router.post("/", (req, res) => {
         !body.director.trim() ||
         body.duration <= 0
     ) {
-        return res.sendStatus(400);
+        return res.status(400).send("Parameter invalid");
     }
 
     const { title, director, duration } = body as NewFilms
@@ -95,7 +95,8 @@ router.post("/", (req, res) => {
     };
     
     defaultFilms.push(newFilm);
-    return res.json(newFilm);
-    
+    return res.send(200).json(newFilm);
 });
+
+
 export default router
