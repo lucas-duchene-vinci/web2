@@ -1,0 +1,46 @@
+
+GET http://localhost:3000/films
+
+###
+
+GET http://localhost:3000/films/?minimum-duration=120&titleStartsWith=so
+
+###
+
+post http://localhost:3000/films
+Content-Type: application/json
+
+{
+    "title": "Something",
+    "director": "Somebody",
+    "duration": 150
+}
+
+###
+
+GET http://localhost:3000/films/2
+
+###
+
+DELETE http://localhost:3000/films/4
+
+###
+
+PATCH http://localhost:3000/films/3
+Content-Type: application/json
+
+{
+    "duration": 140
+}
+
+
+###
+
+PUT http://localhost:3000/films/3
+Content-Type: application/json
+
+{
+    "title": "there was a title",
+    "director": "there was a director",
+    "duration": 1
+}
