@@ -28,7 +28,7 @@ const defaultFilms: Films[] = [
     }
 ];
 
-function readAllFilms(durationMin: number, titleStarts: string): Films[] {
+function readAllFilms(durationMin: number, titleStarts?: string): Films[] {
     const films = parse(jsonDbPath, defaultFilms);
 
     if(!durationMin && ! titleStarts) {
