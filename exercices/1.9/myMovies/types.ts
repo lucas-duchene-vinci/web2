@@ -11,4 +11,19 @@ interface Films {
 }
 
 type NewFilms = Omit<Films, "id">;
-export type { Films, NewFilms };
+
+export enum Level {
+  EASY = "easy",
+  MEDIUM = "medium",
+  HARD = "hard"
+}
+
+interface Text {
+  id: string;
+  content: string;
+  level: Level
+};
+
+type NewText = Omit<Text, "id">;
+
+export type { Films, NewFilms, Text, NewText };
