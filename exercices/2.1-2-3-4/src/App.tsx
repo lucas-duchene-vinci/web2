@@ -13,7 +13,6 @@ interface Movie {
   director: string;
 }
 
-
 const App = () => {
   const pageTitle = "Information sur les films dans les cinémas";
 
@@ -38,7 +37,7 @@ const App = () => {
     director: "Adil El Arbi, Bilall Fallah",
   };
 
-   return (
+  return (
     <div>
       <PageTitle title={pageTitle} />
 
@@ -68,7 +67,5 @@ const Cinema = (props: CinemaProps) => (
     </ul>
   </div>
 );
-  
-
 
 export default App;
