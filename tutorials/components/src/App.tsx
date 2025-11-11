@@ -5,7 +5,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="page" style={{ backgroundImage: `url(${pizzaBackground})` }}>
+    <div id="root" className="page" style={{ backgroundImage: `url(${pizzaBackground})` }}>
       <header>
             <h1 className="animate__animated animate__bounce">We love Pizza</h1>
           </header>
