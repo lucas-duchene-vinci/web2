@@ -23,7 +23,7 @@ const AudioPlayer = ({
       else audioElement.pause();
       clearActionToBePerformed();
     }
-  }, [actionToBePerformed]);
+  }, [actionToBePerformed, clearActionToBePerformed]);
 
   return (
     <div>
