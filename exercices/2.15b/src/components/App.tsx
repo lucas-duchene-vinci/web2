@@ -1,11 +1,11 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import "./App.css";
+import "./App.css"; 
 import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./navbar";
 import { useEffect, useState } from "react";
 import type { Movie, MovieContext, NewMovie } from "../types";
-import { addMovie, fetchMovies } from "../utils/film-service";
+import { addMovie, deleteMovie, fetchMovies } from "../utils/film-service";
 
 const App = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -36,9 +36,22 @@ const App = () => {
     }
   };
 
+  const onMovieDeleted = async (movie: Movie) => {
+    console.log("Movie to delete:", movie);
+
+    try {
+      await deleteMovie(movie);
+      console.log("Movie deleted:", movie);
+      await initMovies();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const movieContext: MovieContext = {
     movies,
     onMovieAdded,
+    onMovieDeleted,
   };
 
   return (
