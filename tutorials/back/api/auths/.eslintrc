@@ -25,6 +25,6 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tutorials/back/api/services/tsconfig.json"
+    "project": "./tutorials/back/api/auths/tsconfig.json"
   }
 }
