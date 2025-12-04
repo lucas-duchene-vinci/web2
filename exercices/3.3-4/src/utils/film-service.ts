@@ -1,4 +1,4 @@
-import type { Movie, NewMovie } from "../types";
+import type { AuthenticatedUser, Movie, NewMovie } from "../types";
 
 const fetchMovies = async (): Promise<Movie[]> => {
   try {
@@ -17,12 +17,16 @@ const fetchMovies = async (): Promise<Movie[]> => {
   }
 };
 
-const addMovie = async (movie: NewMovie): Promise<Movie> => {
+const addMovie = async (
+  movie: NewMovie,
+  authenticatedUser: AuthenticatedUser
+): Promise<Movie> => {
   try {
     const response = await fetch("/api/films", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: authenticatedUser.token,
       },
       body: JSON.stringify(movie),
     });
@@ -37,10 +41,16 @@ const addMovie = async (movie: NewMovie): Promise<Movie> => {
   }
 };
 
-const deleteMovie = async (movie: Movie): Promise<void> => {
+const deleteMovie = async (
+  movie: Movie,
+  authenticatedUser: AuthenticatedUser
+): Promise<void> => {
   try {
     const response = await fetch(`/api/films/${movie.id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: authenticatedUser.token,
+      },
     });
     if (!response.ok) {
       throw new Error("Failed to delete movie : " + response.statusText);
@@ -51,4 +61,29 @@ const deleteMovie = async (movie: Movie): Promise<void> => {
   }
 };
 
-export { fetchMovies, addMovie, deleteMovie };
+const editMovie = async (
+  movie: Movie,
+  authenticatedUser: AuthenticatedUser
+): Promise<Movie> => {
+  try {
+    const movieToEdit = { ...movie, id: undefined }; // Remove id from movie
+    const response = await fetch(`/api/films/${movie.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authenticatedUser.token,
+      },
+      body: JSON.stringify(movieToEdit),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to edit movie : " + response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export { fetchMovies, addMovie, deleteMovie, editMovie };

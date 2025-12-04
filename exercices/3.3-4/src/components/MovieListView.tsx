@@ -4,10 +4,15 @@ import "./MovieListView.css";
 
 interface MovieListViewProps {
   movies: Movie[];
-  onMovieDeleted: (movie: Movie) => void;
+  onMovieDeleted?: (movie: Movie) => void;
+  handleEditMovieRequest?: (movie: Movie) => void;
 }
 
-const MovieListView = ({ movies, onMovieDeleted }: MovieListViewProps) => {
+const MovieListView = ({
+  movies,
+  onMovieDeleted,
+  handleEditMovieRequest,
+}: MovieListViewProps) => {
   return (
     <div>
       <ul className="movie-list-view">
@@ -16,6 +21,7 @@ const MovieListView = ({ movies, onMovieDeleted }: MovieListViewProps) => {
             key={movie.title}
             movie={movie}
             onMovieDeleted={onMovieDeleted}
+            handleEditMovieRequest={handleEditMovieRequest}
           />
         ))}
       </ul>

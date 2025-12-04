@@ -1,5 +1,5 @@
-import { type SyntheticEvent, useState } from "react";
-import { type NewMovie } from "../types";
+import {  type SyntheticEvent, useState } from "react";
+import type { NewMovie } from "../types";
 import "./AddMovieForm.css";
 
 interface AddMovieFormProps {

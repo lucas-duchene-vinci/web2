@@ -9,6 +9,9 @@ import CinemaPage from "./components/pages/CinemaPage";
 import MovieListPage from "./components/pages/MovieListPage";
 import AddMoviePage from "./components/pages/AddMoviePage";
 import MoviePage from "./components/pages/MoviePage";
+import RegisterPage from "./components/pages/RegisterPage";
+import LoginPage from "./components/pages/LoginPage";
+import EditMoviePage from "./components/pages/EditMoviePage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
       {
         path: "movies/:id",
         element: <MoviePage />,
+      },
+      {
+        path: "movies/:id/edit",
+        element: <EditMoviePage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
       },
     ],
   },
